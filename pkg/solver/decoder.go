@@ -19,11 +19,15 @@ import (
 	pkg "github.com/mudler/luet/pkg/package"
 )
 
+// PackageAssert represent a package assertion.
+// It is composed of a Package and a Value which is indicating the absence or not
+// of the associated package state.
 type PackageAssert struct {
 	Package pkg.Package
 	Value   bool
 }
 
+// DecodeModel decodes a model from the SAT solver to package assertions (PackageAssert)
 func DecodeModel(model map[string]bool) ([]PackageAssert, error) {
 	ass := make([]PackageAssert, 0)
 	for k, v := range model {
