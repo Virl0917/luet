@@ -110,6 +110,7 @@ testInstall() {
 testUpgrade() {
     upgrade=$(luet --config $tmpdir/luet.yaml upgrade)
     installst=$?
+    echo "$upgrade"
     assertEquals 'install test successfully' "$installst" "0"
     assertTrue 'package uninstalled B' "[ ! -e '$tmpdir/testrootfs/test5' ]"
     assertTrue 'package installed B' "[ -e '$tmpdir/testrootfs/newc' ]"
