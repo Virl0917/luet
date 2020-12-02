@@ -30,8 +30,24 @@ import (
 )
 
 var installCmd = &cobra.Command{
-	Use:     "install <pkg1> <pkg2> ...",
-	Short:   "Install a package",
+	Use:   "install <pkg1> <pkg2> ...",
+	Short: "Install a package",
+	Long: `Installs one or more packages without asking questions:
+
+	$ luet install -y utils/busybox utils/yq ...
+	
+To install only deps of a package:
+	
+	$ luet install --onlydeps utils/busybox ...
+	
+To not install deps of a package:
+	
+	$ luet install --nodeps utils/busybox ...
+
+To force install a package:
+	
+	$ luet install --force utils/busybox ...
+`,
 	Aliases: []string{"i"},
 	PreRun: func(cmd *cobra.Command, args []string) {
 		LuetCfg.Viper.BindPFlag("system.database_path", cmd.Flags().Lookup("system-dbpath"))
@@ -45,7 +61,6 @@ var installCmd = &cobra.Command{
 		LuetCfg.Viper.BindPFlag("force", cmd.Flags().Lookup("force"))
 		LuetCfg.Viper.BindPFlag("yes", cmd.Flags().Lookup("yes"))
 	},
-	Long: `Install packages in parallel`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var toInstall pkg.Packages
 		var systemDB pkg.PackageDatabase
