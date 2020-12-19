@@ -76,4 +76,3 @@ testReplace() {
 
 # Load shUnit2.
 . "$ROOT_DIR/tests/integration/shunit2"/shunit2
-
