@@ -21,7 +21,7 @@ foo: "baz"
 EOF
     mkdir $tmpdir/testbuild
     luet build --tree "$ROOT_DIR/tests/fixtures/docker_repo" \
-               --destination $tmpdir/testbuild \
+               --destination $tmpdir/testbuild --concurrency 1 \
                --image-repository "${TEST_DOCKER_IMAGE}-cache" --push \
                --compression zstd --values $tmpdir/default.yaml \
                test/c@1.0 test/z test/interpolated #> /dev/null
